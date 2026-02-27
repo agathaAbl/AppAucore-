@@ -12,19 +12,20 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
+
+
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [focused, setFocused] = useState(null);
 
-  // Animação de flutuação do mascote
   const floatAnim = useRef(new Animated.Value(0)).current;
-  // Animação de fade-in geral
+
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Fade in ao entrar na tela
+    
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 800,

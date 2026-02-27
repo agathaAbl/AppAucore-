@@ -7,19 +7,20 @@ import Login from "./src/Login";
 import Home from "./src/Home";
 import Onboarding from "./src/Onboarding";
 import Conteudo from "./src/Conteudo";
-import MentorIA from "./src/MentorIA.js";
+import MentorIA from "./src/MentorIA";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      initialRouteName="Onboarding"
+        initialRouteName="Onboarding"
         screenOptions={{ headerShown: false }}
       >
+        <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Conteudo" component={Conteudo} />
         <Stack.Screen name="MentorIA" component={MentorIA} />
       </Stack.Navigator>
