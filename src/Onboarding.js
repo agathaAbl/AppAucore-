@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
@@ -54,72 +55,76 @@ export default function Onboarding({ navigation }) {
   }, []);
 
   return (
-    <View style={styles.container}>
-      {/* Glows */}
-      <View style={styles.bgGlow1} />
-      <View style={styles.bgGlow2} />
-      <View style={styles.bgGlow3} />
-
-      <Animated.View
-        style={[
-          styles.content,
-          { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
-        ]}
+    // ✅ View pai com backgroundColor garante fundo escuro em toda a tela
+    <View style={{ flex: 1, backgroundColor: "#060D1F" }}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
       >
-        {/* Ícone central animado */}
+        {/* Glows */}
+        <View style={styles.bgGlow1} />
+        <View style={styles.bgGlow2} />
+        <View style={styles.bgGlow3} />
+
         <Animated.View
-          style={[styles.iconWrapper, { transform: [{ scale: pulseAnim }] }]}
+          style={[
+            styles.content,
+            { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
+          ]}
         >
-          <View style={styles.iconGlow} />
-          <View style={styles.iconCircle}>
-            <Feather name="cpu" size={40} color="#38BDF8" />
-          </View>
-        </Animated.View>
-
-        {/* Título */}
-        <Text style={styles.brand}>MentorPath AI</Text>
-        <Text style={styles.title}>
-          Pare de se perder{"\n"}estudando sozinho.
-        </Text>
-        <Text style={styles.subtitle}>
-          Receba um roadmap personalizado com IA e aprenda com direção.
-        </Text>
-
-        {/* Features */}
-        <View style={styles.featuresWrapper}>
-          {FEATURES.map((f, i) => (
-            <View key={i} style={styles.featureRow}>
-              <View style={styles.featureIcon}>
-                <Feather name={f.icon} size={16} color="#38BDF8" />
-              </View>
-              <Text style={styles.featureText}>{f.label}</Text>
+          {/* Ícone central animado */}
+          <Animated.View
+            style={[styles.iconWrapper, { transform: [{ scale: pulseAnim }] }]}
+          >
+            <View style={styles.iconGlow} />
+            <View style={styles.iconCircle}>
+              <Feather name="cpu" size={40} color="#38BDF8" />
             </View>
-          ))}
-        </View>
+          </Animated.View>
 
-        {/* Botão */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Login")}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.buttonText}>Começar agora</Text>
-          <Feather name="arrow-right" size={18} color="#fff" style={{ marginLeft: 8 }} />
-        </TouchableOpacity>
+          {/* Título */}
+          <Text style={styles.brand}>MentorPath AI</Text>
+          <Text style={styles.title}>
+            Pare de se perder{"\n"}estudando sozinho.
+          </Text>
+          <Text style={styles.subtitle}>
+            Receba um roadmap personalizado com IA e aprenda com direção.
+          </Text>
 
-        <Text style={styles.terms}>
-          Gratuito para começar • Sem cartão de crédito
-        </Text>
-      </Animated.View>
+          {/* Features */}
+          <View style={styles.featuresWrapper}>
+            {FEATURES.map((f, i) => (
+              <View key={i} style={styles.featureRow}>
+                <View style={styles.featureIcon}>
+                  <Feather name={f.icon} size={16} color="#38BDF8" />
+                </View>
+                <Text style={styles.featureText}>{f.label}</Text>
+              </View>
+            ))}
+          </View>
+
+          {/* Botão */}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Login")}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.buttonText}>Começar agora</Text>
+            <Feather name="arrow-right" size={18} color="#fff" style={{ marginLeft: 8 }} />
+          </TouchableOpacity>
+
+        
+        </Animated.View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#060D1F",
+    flexGrow: 1,
     justifyContent: "center",
+    paddingVertical: 50,
   },
 
   bgGlow1: {

@@ -1,8 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: height,
     backgroundColor: "#0F172A",
     paddingHorizontal: 25,
     paddingTop: 70,

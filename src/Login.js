@@ -21,18 +21,15 @@ export default function Login({ navigation }) {
   const [focused, setFocused] = useState(null);
 
   const floatAnim = useRef(new Animated.Value(0)).current;
-
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 800,
       useNativeDriver: true,
     }).start();
 
-    // Loop de flutuação do mascote
     Animated.loop(
       Animated.sequence([
         Animated.timing(floatAnim, {
@@ -61,118 +58,113 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* Fundo com gradiente simulado via camadas */}
-      <View style={styles.bgGlow1} />
-      <View style={styles.bgGlow2} />
+    // ✅ backgroundColor aqui garante fundo escuro em toda a tela
+    <View style={{ flex: 1, backgroundColor: "#060D1F" }}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.bgGlow1} />
+        <View style={styles.bgGlow2} />
 
-      <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
+        <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
 
-        {/* Seção superior: logo centralizada */}
-        <View style={styles.topSection}>
-          <Image
-            source={require("../assets/logo_convertido.jpg")}
-            style={styles.logo}
-          />
-          <Text style={styles.subtitle}>
-            Seu mentor digital para evoluir com direção.
-          </Text>
-        </View>
-
-        {/* Wrapper do card com mascote flutuando acima */}
-        <View style={styles.cardWrapper}>
-
-          {/* Mascote flutuando centralizado acima do card */}
-          <Animated.View
-            style={[
-              styles.mascoteWrapper,
-              { transform: [{ translateY: floatAnim }] },
-            ]}
-          >
-            {/* Glow atrás do mascote */}
-            <View style={styles.mascoteGlow} />
+          <View style={styles.topSection}>
             <Image
-              source={require("../assets/mascote_convertido.jpg")}
-              style={styles.mascote}
+              source={require("../assets/logo_convertido.jpg")}
+              style={styles.logo}
             />
-          </Animated.View>
+            <Text style={styles.subtitle}>
+              Seu mentor digital para evoluir com direção.
+            </Text>
+          </View>
 
-          {/* Card do formulário */}
-          <View style={styles.card}>
-            {/* Espaço para o mascote não cobrir o conteúdo */}
-            <View style={styles.cardSpacer} />
+          <View style={styles.cardWrapper}>
 
-            <View style={[styles.inputWrapper, focused === "email" && styles.inputFocused]}>
-              <Feather name="mail" size={18} color="#7DD3FC" style={{ marginRight: 10 }} />
-              <TextInput
-                style={styles.inputFlex}
-                placeholder="Email"
-                placeholderTextColor="#7DD3FC"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                onFocus={() => setFocused("email")}
-                onBlur={() => setFocused(null)}
+            <Animated.View
+              style={[
+                styles.mascoteWrapper,
+                { transform: [{ translateY: floatAnim }] },
+              ]}
+            >
+              <View style={styles.mascoteGlow} />
+              <Image
+                source={require("../assets/mascote_convertido.jpg")}
+                style={styles.mascote}
               />
-            </View>
+            </Animated.View>
 
-            <View style={[styles.inputWrapper, focused === "senha" && styles.inputFocused]}>
-              <Feather name="lock" size={18} color="#7DD3FC" style={{ marginRight: 10 }} />
-              <TextInput
-                style={styles.inputFlex}
-                placeholder="Senha"
-                placeholderTextColor="#7DD3FC"
-                secureTextEntry={!showPassword}
-                value={password}
-                onChangeText={setPassword}
-                onFocus={() => setFocused("senha")}
-                onBlur={() => setFocused(null)}
-              />
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <Feather
-                  name={showPassword ? "eye" : "eye-off"}
-                  size={18}
-                  color="#7DD3FC"
+            <View style={styles.card}>
+              <View style={styles.cardSpacer} />
+
+              <View style={[styles.inputWrapper, focused === "email" && styles.inputFocused]}>
+                <Feather name="mail" size={18} color="#7DD3FC" style={{ marginRight: 10 }} />
+                <TextInput
+                  style={styles.inputFlex}
+                  placeholder="Email"
+                  placeholderTextColor="#7DD3FC"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  onFocus={() => setFocused("email")}
+                  onBlur={() => setFocused(null)}
                 />
+              </View>
+
+              <View style={[styles.inputWrapper, focused === "senha" && styles.inputFocused]}>
+                <Feather name="lock" size={18} color="#7DD3FC" style={{ marginRight: 10 }} />
+                <TextInput
+                  style={styles.inputFlex}
+                  placeholder="Senha"
+                  placeholderTextColor="#7DD3FC"
+                  secureTextEntry={!showPassword}
+                  value={password}
+                  onChangeText={setPassword}
+                  onFocus={() => setFocused("senha")}
+                  onBlur={() => setFocused(null)}
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                  <Feather
+                    name={showPassword ? "eye" : "eye-off"}
+                    size={18}
+                    color="#7DD3FC"
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={handleLogin}
+                activeOpacity={0.85}
+              >
+                <Text style={styles.buttonText}>Entrar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.forgotBtn}>
+                <Text style={styles.forgotText}>Esqueceu a senha?</Text>
               </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleLogin}
-              activeOpacity={0.85}
-            >
-              <Text style={styles.buttonText}>Entrar</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.forgotBtn}>
-              <Text style={styles.forgotText}>Esqueceu a senha?</Text>
-            </TouchableOpacity>
           </View>
-        </View>
 
-      </Animated.View>
-    </ScrollView>
+        </Animated.View>
+      </ScrollView>
+    </View>
   );
 }
 
 const MASCOTE_SIZE = 100;
-const MASCOTE_OVERLAP = MASCOTE_SIZE / 2; // quanto o mascote fica fora do card
+const MASCOTE_OVERLAP = MASCOTE_SIZE / 2;
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#060D1F",
+    // ✅ removido backgroundColor daqui — agora está no View pai
     justifyContent: "center",
     paddingHorizontal: 24,
     paddingVertical: 50,
   },
 
-  // Glows decorativos de fundo
   bgGlow1: {
     position: "absolute",
     top: -80,
@@ -182,7 +174,6 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     backgroundColor: "#1E3A8A",
     opacity: 0.25,
-    // React Native não tem blur nativo sem lib, mas a opacidade já cria profundidade
   },
   bgGlow2: {
     position: "absolute",
@@ -200,7 +191,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  // Topo com logo
   topSection: {
     alignItems: "center",
     marginBottom: 40,
@@ -221,17 +211,15 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // Wrapper que posiciona mascote + card juntos
   cardWrapper: {
     alignItems: "center",
   },
 
-  // Mascote centralizado, sobrepondo o card
   mascoteWrapper: {
     zIndex: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: -MASCOTE_OVERLAP, // puxa para baixo, sobrepondo o card
+    marginBottom: -MASCOTE_OVERLAP,
   },
 
   mascoteGlow: {
@@ -252,7 +240,6 @@ const styles = StyleSheet.create({
     borderColor: "#38BDF8",
   },
 
-  // Card do formulário
   card: {
     width: "100%",
     backgroundColor: "#0F1F3D",
@@ -262,7 +249,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     borderWidth: 1,
     borderColor: "#1E3A5F",
-    // Sombra
     shadowColor: "#38BDF8",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
@@ -270,7 +256,6 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
-  // Espaço reservado para o mascote que sobrepõe o card
   cardSpacer: {
     height: MASCOTE_OVERLAP + 16,
   },

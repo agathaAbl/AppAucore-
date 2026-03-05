@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-// ─── Mensagens iniciais do mentor ───────────────────────────────────────────
 const INITIAL_MESSAGES = [
   {
     id: "1",
@@ -22,7 +21,6 @@ const INITIAL_MESSAGES = [
   },
 ];
 
-// ─── Sugestões rápidas ───────────────────────────────────────────────────────
 const SUGGESTIONS = [
   "Quero aprender programação do zero",
   "Me ajuda a estudar para concurso",
@@ -30,7 +28,6 @@ const SUGGESTIONS = [
   "Criar um roadmap de UX Design",
 ];
 
-// ─── Simula resposta da IA ────────────────────────────────────────────────────
 function getMentorResponse(userMsg) {
   const msg = userMsg.toLowerCase();
 
@@ -111,14 +108,14 @@ export default function MentorIA({ navigation }) {
   };
 
   return (
+    // ✅ backgroundColor aqui garante fundo escuro em toda a tela
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: "#060D1F" }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={90}
     >
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
 
-        {/* Glows */}
         <View style={styles.bgGlow1} />
         <View style={styles.bgGlow2} />
 
@@ -153,7 +150,6 @@ export default function MentorIA({ navigation }) {
         >
           {messages.map(renderMessage)}
 
-          {/* Indicador de digitação */}
           {isTyping && (
             <View style={[styles.msgRow, styles.msgRowAI]}>
               <View style={styles.aiAvatar}>
@@ -166,7 +162,6 @@ export default function MentorIA({ navigation }) {
             </View>
           )}
 
-          {/* Sugestões (só no início) */}
           {messages.length === 1 && !isTyping && (
             <View style={styles.suggestionsWrapper}>
               <Text style={styles.suggestionsLabel}>Sugestões para começar:</Text>
@@ -238,7 +233,6 @@ const styles = StyleSheet.create({
     opacity: 0.13,
   },
 
-  // Header
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -299,7 +293,6 @@ const styles = StyleSheet.create({
     padding: 4,
   },
 
-  // Chat
   chat: {
     flex: 1,
   },
@@ -308,7 +301,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 
-  // Mensagens
   msgRow: {
     flexDirection: "row",
     marginBottom: 16,
@@ -364,7 +356,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // Typing
   typingBubble: {
     flexDirection: "row",
     alignItems: "center",
@@ -378,7 +369,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // Sugestões
   suggestionsWrapper: {
     marginTop: 8,
     marginBottom: 4,
@@ -406,7 +396,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // Input
   inputArea: {
     paddingHorizontal: 16,
     paddingVertical: 12,

@@ -61,7 +61,13 @@ export default function Home({ navigation }) {
         >
           {/* Header */}
           <View style={styles.header}>
-            <View>
+            <TouchableOpacity
+              style={styles.backBtn}
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Feather name="arrow-left" size={20} color="#38BDF8" />
+            </TouchableOpacity>
+            <View style={{ flex: 1 }}>
               <Text style={styles.greetingSmall}>Olá de volta 👋</Text>
               <Text style={styles.greetingBig}>Bem-vinda!</Text>
             </View>
@@ -153,17 +159,23 @@ export default function Home({ navigation }) {
               <Text style={styles.actionLabel}>Conteúdos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}>
+            <TouchableOpacity style={styles.actionCard}
+              onPress={() => navigation.navigate("Conteudo")}
+            >
               <Feather name="bar-chart-2" size={24} color="#38BDF8" />
               <Text style={styles.actionLabel}>Progresso</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}>
+            <TouchableOpacity style={styles.actionCard}
+              onPress={() => navigation.navigate("MentorIA")}
+            >
               <Feather name="award" size={24} color="#38BDF8" />
               <Text style={styles.actionLabel}>Conquistas</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}>
+            <TouchableOpacity style={styles.actionCard}
+              onPress={() => navigation.navigate("MentorIA")}
+            >
               <Feather name="settings" size={24} color="#38BDF8" />
               <Text style={styles.actionLabel}>Config.</Text>
             </TouchableOpacity>
@@ -184,7 +196,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 24,
     paddingTop: 60,
-    paddingBottom: 100,
+    paddingBottom: 60,
   },
 
   bgGlow1: {
@@ -208,6 +220,17 @@ const styles = StyleSheet.create({
     opacity: 0.15,
   },
 
+  backBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 13,
+    backgroundColor: "#0F1F3D",
+    borderWidth: 1,
+    borderColor: "#1E3A5F",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -396,7 +419,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#0F1F3D",
     borderRadius: 16,
-    paddingVertical: 18,
+    paddingVertical: 22,
     marginHorizontal: 4,
     borderWidth: 1,
     borderColor: "#1E3A5F",
@@ -404,7 +427,8 @@ const styles = StyleSheet.create({
   actionLabel: {
     color: "#94A3B8",
     fontSize: 11,
-    marginTop: 8,
+    marginTop: 10,
+    textAlign: "center",
   },
 
   // FAB flutuante
