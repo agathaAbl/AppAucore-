@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import styles from "./stylesconteudo";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+  StyleSheet, 
+} from "react-native";
+import { Feather } from "@expo/vector-icons"; 
+import styles from "./stylesconteudo"; 
+import colors from "../screens/colors"; 
 
 const roadmap = [
   { id: "1", title: "Lógica de Programação" },
@@ -11,7 +19,7 @@ const roadmap = [
   { id: "5", title: "Autenticação JWT" },
 ];
 
-export default function Conteudo() {
+export default function Conteudo({ navigation }) {
   const [likes, setLikes] = useState({});
   const [pesquisas, setPesquisas] = useState(0);
 
@@ -44,14 +52,14 @@ export default function Conteudo() {
           <Feather
             name="thumbs-up"
             size={20}
-            color={likes[item.id] === "like" ? "#22C55E" : "#94A3B8"}
+            color={likes[item.id] === "like" ? colors.success : colors.textSecondary}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLike(item.id, "dislike")}>
           <Feather
             name="thumbs-down"
             size={20}
-            color={likes[item.id] === "dislike" ? "#EF4444" : "#94A3B8"}
+            color={likes[item.id] === "dislike" ? colors.error : colors.textSecondary}
           />
         </TouchableOpacity>
       </View>
@@ -59,33 +67,52 @@ export default function Conteudo() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Mapa de Aprendizado</Text>
-      <FlatList
-        data={roadmap}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
+    <View style={{ flex: 1 }}>
+      {/* Fundo com bolinhas */}
+      <View style={StyleSheet.absoluteFill} pointerEvents="none">
+        <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.background }} />
+        <View style={styles.bgGlow1} />
+        <View style={styles.bgGlow2} />
+        <View style={styles.bgGlow3} />
+        <View style={styles.bgGlow4} />
+      </View>
 
-      <Text style={styles.limitText}>
-        Pesquisas realizadas: {pesquisas}/5 (modo Free)
-      </Text>
-
-      {pesquisas >= 5 && (
-        <TouchableOpacity
-          style={styles.premiumButton}
-          onPress={() =>
-            Alert.alert("Premium", "Assine para liberar pesquisas ilimitadas!")
-          }
-        >
-          <Text style={styles.premiumText}>Assinar Premium</Text>
+      {/* Conteúdo principal */}
+      <View style={styles.container}>
+        {/* Seta de voltar acima do título */}
+        <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
+          <Feather name="arrow-left" size={26} color={colors.primary} />
         </TouchableOpacity>
-      )}
 
-      <TouchableOpacity style={styles.button} onPress={handleNovaPesquisa}>
-        <Text style={styles.buttonText}>Nova Pesquisa</Text>
-      </TouchableOpacity>
+        {/* Título */}
+        <Text style={styles.title}>Mapa de Aprendizado</Text>
+
+        <FlatList
+          data={roadmap}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        />
+
+        <Text style={styles.limitText}>
+          Pesquisas realizadas: {pesquisas}/5 (modo Free)
+        </Text>
+
+        {pesquisas >= 5 && (
+          <TouchableOpacity
+            style={styles.premiumButton}
+            onPress={() =>
+              Alert.alert("Premium", "Assine para liberar pesquisas ilimitadas!")
+            }
+          >
+            <Text style={styles.premiumText}>Assinar Premium</Text>
+          </TouchableOpacity>
+        )}
+
+        <TouchableOpacity style={styles.button} onPress={handleNovaPesquisa}>
+          <Text style={styles.buttonText}>Nova Pesquisa</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
