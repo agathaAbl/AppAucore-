@@ -1,179 +1,91 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import styles from "./stylesconteudo";
 
-const MAX_FREE_SEARCHES = 5;
-
-// Dados de exemplo do roadmap
-const ROADMAP_ITEMS = [
-  { id: 1, label: "Lógica de Programação", done: true },
-  { id: 2, label: "Estruturas de Dados", done: false },
-  { id: 3, label: "APIs REST", done: false },
-  { id: 4, label: "Banco de Dados", done: false },
-  { id: 5, label: "Autenticação JWT", done: false },
+const roadmap = [
+  { id: "1", title: "Lógica de Programação" },
+  { id: "2", title: "Estruturas de Dados" },
+  { id: "3", title: "APIs REST" },
+  { id: "4", title: "Banco de Dados" },
+  { id: "5", title: "Autenticação JWT" },
 ];
 
-export default function Conteudo({ route, navigation }) {
-  const query = route?.params?.query || "Nada pesquisado";
-
-  const [searchCount, setSearchCount] = useState(1); // Contador de pesquisas
-  const [likes, setLikes] = useState({}); // Guarda curtir/não curtir
-  const [items] = useState(ROADMAP_ITEMS);
-
-  const handleBalloonPress = (item) => {
-    Alert.alert("Detalhes do item", `Você clicou em "${item.label}"`);
-  };
+export default function Conteudo() {
+  const [likes, setLikes] = useState({});
+  const [pesquisas, setPesquisas] = useState(0);
 
   const handleLike = (id, value) => {
     setLikes({ ...likes, [id]: value });
   };
 
-  const handleNewSearch = () => {
-    if (searchCount >= MAX_FREE_SEARCHES) {
+  const handleNovaPesquisa = () => {
+    if (pesquisas >= 5) {
       Alert.alert(
         "Limite atingido",
-        "Você atingiu o limite de pesquisas gratuitas. Assine o Premium para continuar.",
-        [
-          {
-            text: "Assinar Premium",
-            onPress: () => navigation.navigate("Premium"),
-          },
-          { text: "Cancelar", style: "cancel" },
-        ]
+        "Você atingiu o limite de 5 pesquisas no modo Free. Assine o Premium para continuar!"
       );
-      return;
+    } else {
+      setPesquisas(pesquisas + 1);
+      Alert.alert("Nova Pesquisa", "Sua pesquisa foi iniciada!");
     }
-    setSearchCount(searchCount + 1);
-    Alert.alert("Nova pesquisa", "Aqui você faria uma nova pesquisa.");
   };
 
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 50 }}>
-      <Text style={styles.title}>Resultado da Pesquisa:</Text>
-      <Text style={styles.queryText}>{query}</Text>
-
-      <Text style={styles.sectionTitle}>Mapa de Aprendizado</Text>
-
-      <View style={styles.roadmap}>
-        {items.map((item) => (
-          <View key={item.id} style={styles.balloonContainer}>
-            <TouchableOpacity
-              style={styles.balloon}
-              onPress={() => handleBalloonPress(item)}
-            >
-              <Text style={styles.balloonText}>
-                {item.label.length > 20
-                  ? item.label.slice(0, 17) + "..."
-                  : item.label}
-              </Text>
-            </TouchableOpacity>
-
-            <View style={styles.likeRow}>
-              <TouchableOpacity
-                style={[
-                  styles.likeBtn,
-                  likes[item.id] === "like" && styles.liked,
-                ]}
-                onPress={() => handleLike(item.id, "like")}
-              >
-                <Text style={styles.likeText}>👍</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[
-                  styles.likeBtn,
-                  likes[item.id] === "dislike" && styles.disliked,
-                ]}
-                onPress={() => handleLike(item.id, "dislike")}
-              >
-                <Text style={styles.likeText}>👎</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ))}
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.balloon}
+      onPress={() => Alert.alert(item.title, "Detalhes do conteúdo")}
+    >
+      <Text style={styles.balloonText}>
+        {item.title.length > 20 ? item.title.slice(0, 20) + "..." : item.title}
+      </Text>
+      <View style={styles.actions}>
+        <TouchableOpacity onPress={() => handleLike(item.id, "like")}>
+          <Feather
+            name="thumbs-up"
+            size={20}
+            color={likes[item.id] === "like" ? "#22C55E" : "#94A3B8"}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleLike(item.id, "dislike")}>
+          <Feather
+            name="thumbs-down"
+            size={20}
+            color={likes[item.id] === "dislike" ? "#EF4444" : "#94A3B8"}
+          />
+        </TouchableOpacity>
       </View>
+    </TouchableOpacity>
+  );
 
-      <TouchableOpacity style={styles.searchBtn} onPress={handleNewSearch}>
-        <Text style={styles.searchBtnText}>Nova Pesquisa</Text>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Mapa de Aprendizado</Text>
+      <FlatList
+        data={roadmap}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      />
+
+      <Text style={styles.limitText}>
+        Pesquisas realizadas: {pesquisas}/5 (modo Free)
+      </Text>
+
+      {pesquisas >= 5 && (
+        <TouchableOpacity
+          style={styles.premiumButton}
+          onPress={() =>
+            Alert.alert("Premium", "Assine para liberar pesquisas ilimitadas!")
+          }
+        >
+          <Text style={styles.premiumText}>Assinar Premium</Text>
+        </TouchableOpacity>
+      )}
+
+      <TouchableOpacity style={styles.button} onPress={handleNovaPesquisa}>
+        <Text style={styles.buttonText}>Nova Pesquisa</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#0A0F1F",
-    padding: 20,
-  },
-  title: {
-    color: "#fff",
-    fontSize: 22,
-    marginBottom: 8,
-  },
-  queryText: {
-    color: "#00BFFF",
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    color: "#38BDF8",
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: 12,
-  },
-  roadmap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 12,
-  },
-  balloonContainer: {
-    width: "48%",
-    marginBottom: 16,
-    alignItems: "center",
-  },
-  balloon: {
-    backgroundColor: "#1E2A47",
-    paddingVertical: 14,
-    paddingHorizontal: 10,
-    borderRadius: 16,
-    minHeight: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  balloonText: {
-    color: "#fff",
-    fontSize: 14,
-    textAlign: "center",
-  },
-  likeRow: {
-    flexDirection: "row",
-    marginTop: 6,
-    gap: 8,
-  },
-  likeBtn: {
-    padding: 6,
-    borderRadius: 8,
-    backgroundColor: "#2A3B59",
-  },
-  liked: {
-    backgroundColor: "#34D399",
-  },
-  disliked: {
-    backgroundColor: "#F87171",
-  },
-  likeText: {
-    fontSize: 16,
-  },
-  searchBtn: {
-    marginTop: 20,
-    backgroundColor: "#0EA5E9",
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  searchBtnText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "700",
-  },
-});

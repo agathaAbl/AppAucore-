@@ -167,12 +167,7 @@ const styles = StyleSheet.create({
     padding: 24,
     alignSelf: "center",
     marginTop: height * 0.2,
-
-    // borda no card
-    borderWidth: 2,
     borderColor: colors.accent,
-
-    // sombra
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.4,

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import colors from "./colors"; // importa paleta
+import colors from "./colors"; 
 
 const { width, height } = Dimensions.get("window");
 
@@ -51,7 +51,7 @@ export default function LoginMicrosoft({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* Fundo com bolinhas */}
+      {/* Fundo com */}
       <View style={StyleSheet.absoluteFill} pointerEvents="none">
         <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.background }} />
         <View style={{
@@ -96,7 +96,7 @@ export default function LoginMicrosoft({ navigation }) {
         }} />
       </View>
 
-      {/* Seta estilo boquinha de jacaré */}
+      {/* Seta  */}
       <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
         <Text style={styles.arrowText}>{"<"}</Text>
       </TouchableOpacity>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   arrowText: {
     color: colors.textPrimary,
-    fontSize: 34, // maior para parecer uma boquinha de jacaré
+    fontSize: 34, 
     fontWeight: "bold",
   },
   title: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     borderWidth: 2,
-    borderColor: colors.accent, // borda no botão
+    borderColor: colors.accent, 
   },
   buttonText: {
     color: colors.textPrimary,
@@ -167,12 +167,7 @@ const styles = StyleSheet.create({
     padding: 24,
     alignSelf: "center",
     marginTop: height * 0.2,
-
-    // borda no card
-    borderWidth: 2,
     borderColor: colors.accent,
-
-    // sombra
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.4,

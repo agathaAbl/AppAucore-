@@ -2,13 +2,12 @@ import React, { useEffect, useRef } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
   Animated,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-
+import styles from "./HomeStyles"; 
 export default function Home({ navigation }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(30)).current;
@@ -28,7 +27,6 @@ export default function Home({ navigation }) {
       }),
     ]).start();
 
-    // Pulso no botão do Mentor IA
     Animated.loop(
       Animated.sequence([
         Animated.timing(pulseAnim, {
@@ -76,7 +74,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          {/* Banner Mentor IA destaque */}
+          {/* Banner Mentor IA */}
           <TouchableOpacity
             style={styles.mentorBanner}
             onPress={() => navigation.navigate("MentorIA")}
@@ -159,21 +157,24 @@ export default function Home({ navigation }) {
               <Text style={styles.actionLabel}>Conteúdos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}
+            <TouchableOpacity
+              style={styles.actionCard}
               onPress={() => navigation.navigate("Conteudo")}
             >
               <Feather name="bar-chart-2" size={24} color="#38BDF8" />
               <Text style={styles.actionLabel}>Progresso</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}
+            <TouchableOpacity
+              style={styles.actionCard}
               onPress={() => navigation.navigate("MentorIA")}
             >
               <Feather name="award" size={24} color="#38BDF8" />
               <Text style={styles.actionLabel}>Conquistas</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.actionCard}
+            <TouchableOpacity
+              style={styles.actionCard}
               onPress={() => navigation.navigate("MentorIA")}
             >
               <Feather name="settings" size={24} color="#38BDF8" />
@@ -182,280 +183,6 @@ export default function Home({ navigation }) {
           </View>
         </Animated.View>
       </ScrollView>
-
-      {/* Botão flutuante Mentor IA removido — use a aba abaixo */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#060D1F",
-  },
-  content: {
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 60,
-  },
-
-  bgGlow1: {
-    position: "absolute",
-    top: -60,
-    right: -80,
-    width: 280,
-    height: 280,
-    borderRadius: 140,
-    backgroundColor: "#1E3A8A",
-    opacity: 0.2,
-  },
-  bgGlow2: {
-    position: "absolute",
-    bottom: 100,
-    left: -80,
-    width: 240,
-    height: 240,
-    borderRadius: 120,
-    backgroundColor: "#0369A1",
-    opacity: 0.15,
-  },
-
-  backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 13,
-    backgroundColor: "#0F1F3D",
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 12,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-  },
-  greetingSmall: {
-    color: "#94A3B8",
-    fontSize: 14,
-    marginBottom: 2,
-  },
-  greetingBig: {
-    color: "#E2E8F0",
-    fontSize: 26,
-    fontWeight: "bold",
-    letterSpacing: 0.5,
-  },
-  avatarBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "#0F1F3D",
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  // Banner Mentor IA
-  mentorBanner: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#0C1E3A",
-    borderRadius: 18,
-    padding: 16,
-    marginBottom: 16,
-    borderWidth: 1.5,
-    borderColor: "#0EA5E9",
-    shadowColor: "#0EA5E9",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 14,
-    elevation: 8,
-  },
-  mentorBannerLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-  },
-  mentorBannerIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 13,
-    backgroundColor: "#0F1F3D",
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 10,
-  },
-  mentorBannerTitle: {
-    color: "#E2E8F0",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  mentorBannerSub: {
-    color: "#22C55E",
-    fontSize: 12,
-    marginTop: 2,
-  },
-  mentorBannerBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  onlineDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#22C55E",
-    marginRight: 6,
-  },
-
-  bannerCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#0F1F3D",
-    borderRadius: 18,
-    padding: 18,
-    marginBottom: 28,
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-    shadowColor: "#38BDF8",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  bannerIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
-    backgroundColor: "#162033",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 14,
-  },
-  bannerLabel: {
-    color: "#64748B",
-    fontSize: 12,
-    marginBottom: 4,
-  },
-  bannerTitle: {
-    color: "#E2E8F0",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-
-  sectionTitle: {
-    color: "#94A3B8",
-    fontSize: 13,
-    fontWeight: "600",
-    letterSpacing: 0.8,
-    textTransform: "uppercase",
-    marginBottom: 12,
-  },
-
-  progressCard: {
-    backgroundColor: "#0F1F3D",
-    borderRadius: 18,
-    padding: 18,
-    marginBottom: 28,
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-  },
-  progressRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 10,
-  },
-  progressLabel: { color: "#CBD5E1", fontSize: 14 },
-  progressPercent: { color: "#38BDF8", fontWeight: "bold", fontSize: 14 },
-  progressBarBg: {
-    height: 8,
-    backgroundColor: "#162033",
-    borderRadius: 4,
-    overflow: "hidden",
-  },
-  progressBarFill: {
-    height: 8,
-    backgroundColor: "#0EA5E9",
-    borderRadius: 4,
-  },
-
-  continueCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#0F1F3D",
-    borderRadius: 18,
-    padding: 18,
-    marginBottom: 28,
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-    shadowColor: "#0EA5E9",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  continueIconWrapper: { marginRight: 14 },
-  continueTitle: {
-    color: "#E2E8F0",
-    fontWeight: "bold",
-    fontSize: 15,
-    marginBottom: 4,
-  },
-  continueSubtitle: { color: "#64748B", fontSize: 13 },
-
-  actionsRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  actionCard: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#0F1F3D",
-    borderRadius: 16,
-    paddingVertical: 22,
-    marginHorizontal: 4,
-    borderWidth: 1,
-    borderColor: "#1E3A5F",
-  },
-  actionLabel: {
-    color: "#94A3B8",
-    fontSize: 11,
-    marginTop: 10,
-    textAlign: "center",
-  },
-
-  // FAB flutuante
-  fab: {
-    position: "absolute",
-    bottom: 30,
-    right: 24,
-  },
-  fabBtn: {
-    width: 62,
-    height: 62,
-    borderRadius: 20,
-    backgroundColor: "#0EA5E9",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#0EA5E9",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.5,
-    shadowRadius: 16,
-    elevation: 14,
-  },
-  fabGlow: {
-    position: "absolute",
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#0EA5E9",
-    opacity: 0.15,
-  },
-});
