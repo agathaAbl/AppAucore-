@@ -3,20 +3,20 @@ import { StyleSheet, Platform, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-
   // ScrollView
   scroll: {
     flexGrow: 1,
     paddingHorizontal: 24,
     paddingTop: Platform.OS === "ios" ? 60 : 44,
     paddingBottom: 40,
+    overflow: "hidden",
   },
 
   // Logo
   logoContainer: {
     alignItems: "center",
     marginBottom: 36,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   logo: {
     width: 180,
@@ -24,22 +24,34 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
-  // Card do formulário
+  // Card principal
   card: {
     backgroundColor: "rgba(12, 26, 48, 0.9)",
     borderRadius: 28,
     padding: 24,
-    borderWidth: 1.5,
-    borderColor: "rgba(14, 165, 233, 0.15)",
     marginBottom: 28,
+
+    // borda visível
+    borderWidth: 2,
+    borderColor: "#0EA5E9",
+
+    // sombra
     shadowColor: "#0EA5E9",
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.15,
     shadowRadius: 20,
     elevation: 8,
+    overflow: "hidden",
   },
 
-  // Inputs
+  // Input
+  input: {
+    flex: 1,
+    color: "#E2E8F0",
+    fontSize: 15,
+    fontWeight: "500",
+    paddingVertical: 0,
+  },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
@@ -62,13 +74,6 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
-  input: {
-    flex: 1,
-    color: "#E2E8F0",
-    fontSize: 15,
-    fontWeight: "500",
-    paddingVertical: 0,
-  },
 
   // Esqueceu a senha
   forgotText: {
@@ -84,6 +89,11 @@ const styles = StyleSheet.create({
     paddingVertical: 17,
     alignItems: "center",
     justifyContent: "center",
+
+    // borda no botão
+    borderWidth: 2,
+    borderColor: "#0EA5E9",
+
     shadowColor: "#0EA5E9",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.45,
@@ -127,8 +137,10 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderWidth: 1.5,
-    borderColor: "#1E3A5F",
+
+    // borda visível
+    borderWidth: 2,
+    borderColor: "#0EA5E9",
   },
   socialText: {
     color: "#CBD5E1",

@@ -8,8 +8,8 @@ import Home from "./screens/Home";
 import Onboarding from "./screens/Onboarding";
 import Conteudo from "./screens/Conteudo";
 import MentorIA from "./screens/MentorIA";
-import ForgotPassword from "./screens/ForgotPassword ";
-import LoginGoogle from "./screens/LoginGoogle";
+import ForgotPassword from "./screens/ForgotPassword";
+import LoginComGoogle from "./screens/LoginComGoogle";
 import LoginApple from "./screens/LoginApple";
 import LoginMicrosoft from "./screens/LoginMicrosoft";
 import CriarConta from "./screens/Criarconta";
@@ -28,8 +28,8 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Conteudo" component={Conteudo} />
         <Stack.Screen name="MentorIA" component={MentorIA} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
+        <Stack.Screen name="ForgotPassword"component={ForgotPassword} />
+        <Stack.Screen name="LoginComGoogle" component={LoginComGoogle} />
         <Stack.Screen name="LoginApple" component={LoginApple} />
         <Stack.Screen name="LoginMicrosoft" component={LoginMicrosoft} />
         <Stack.Screen name="CriarConta" component={CriarConta} />

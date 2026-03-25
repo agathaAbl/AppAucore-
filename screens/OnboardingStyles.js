@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
 
-  // ─── TELA 0 — SPLASH ───────────────────────────────────────────────
+  // SPLASH 
   container: {
     flexGrow: 1,
     alignItems: "center",
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // Features box
+  
   featuresWrapper: {
     width: "100%",
     backgroundColor: "rgba(12, 26, 48, 0.85)",
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // CTA Button
+  
   button: {
     flexDirection: "row",
     alignItems: "center",
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
 
-  // ─── TELAS 1-5 — PERGUNTAS ─────────────────────────────────────────
+  
   qContainer: {
     flexGrow: 1,
     paddingBottom: 40,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  // Card de pergunta
+  
   qCard: {
     backgroundColor: "rgba(12, 26, 48, 0.9)",
     borderRadius: 28,

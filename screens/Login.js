@@ -171,7 +171,7 @@ export default function Login({ navigation }) {
           {/* Social Buttons */}
           <View style={{ marginBottom: 12 }}>
             <View style={styles.socialButtonWrapper}>
-              <TouchableOpacity onPress={() => navigation.navigate("LoginGoogle")} activeOpacity={0.8} style={styles.socialButton}>
+              <TouchableOpacity onPress={() => navigation.navigate("LoginComGoogle")} activeOpacity={0.8} style={styles.socialButton}>
                 <AntDesign name="google" size={24} color="#DB4437" style={{ marginRight: 10 }} />
                 <Text style={styles.socialText}>Continuar com Google</Text>
               </TouchableOpacity>

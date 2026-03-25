@@ -8,11 +8,11 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import colors from "./colors"; // importa paleta
+import colors from "./colors"; 
 
 const { width, height } = Dimensions.get("window");
 
-export default function LoginApple({ navigation }) {
+export default function LoginGoogle({ navigation }) {
   const [email, setEmail] = useState("");
 
   const data = [
@@ -25,13 +25,13 @@ export default function LoginApple({ navigation }) {
   const renderItem = ({ item }) => {
     switch (item.type) {
       case "title":
-        return <Text style={styles.title}>Login com Apple</Text>;
+        return <Text style={styles.title}>Login com Google</Text>;
       case "subtitle":
-        return <Text style={styles.subtitle}>Digite aqui o seu e-mail Apple</Text>;
+        return <Text style={styles.subtitle}>Digite aqui o seu e-mail</Text>;
       case "input":
         return (
           <TextInput
-            placeholder="E-mail Apple"
+            placeholder="E-mail"
             placeholderTextColor={colors.textSecondary}
             value={email}
             onChangeText={setEmail}
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   arrowText: {
     color: colors.textPrimary,
-    fontSize: 34, // maior para parecer uma boquinha de jacaré
+    fontSize: 34, 
     fontWeight: "bold",
   },
   title: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     borderWidth: 2,
-    borderColor: colors.accent, 
+    borderColor: colors.accent,
   },
   buttonText: {
     color: colors.textPrimary,
@@ -162,17 +162,13 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "90%",
-    backgroundColor: "rgba(12, 26, 48, 0.95)",
+    backgroundColor: "rgba(12, 26, 48, 0.95)", 
     borderRadius: 26,
     padding: 24,
     alignSelf: "center",
     marginTop: height * 0.2,
-
-    // borda no card
     borderWidth: 2,
     borderColor: colors.accent,
-
-    // sombra
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.4,
